@@ -2,7 +2,7 @@ namespace WasteRecycling
 {
     public class PaperGarbage : Garbage
     {
-        public bool Squeezed { get; set; }
+        public bool Squeezed;
 
         public PaperGarbage(string name, bool squeezed) : base(name)
         {

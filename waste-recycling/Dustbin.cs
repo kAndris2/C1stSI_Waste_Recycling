@@ -4,10 +4,10 @@ namespace WasteRecycling
 {
     public class Dustbin
     {
-        public string color { get; set; }
-        public PaperGarbage[] PaperContent { get; set; }
-        public PlasticGarbage[] PlasticContent { get; set; }
-        public Garbage[] HouseWasteContent { get; set; }
+        public string color;
+        public PaperGarbage[] PaperContent;
+        public PlasticGarbage[] PlasticContent;
+        public Garbage[] HouseWasteContent;
 
         public Dustbin(string color)
         {
@@ -43,8 +43,14 @@ namespace WasteRecycling
             {
                 if (((PlasticGarbage)garbage).Cleaned)
                 {
-                    PlasticContent = new PlasticGarbage[PlasticContent.Length + 1];
-                    PlasticContent[PlasticContent.Length -1] = ((PlasticGarbage)garbage);
+                    PlasticGarbage[] myarray = new PlasticGarbage[PlasticContent.Length];
+                    Array.Copy(PlasticContent, myarray, PlasticContent.Length);
+                    PlasticContent = new PlasticGarbage[myarray.Length + 1];
+
+                    for (int i = 0; i < myarray.Length; i++)
+                        PlasticContent[i] = myarray[i];
+
+                    PlasticContent[PlasticContent.Length -1] = (PlasticGarbage)garbage;
                 }
                 else
                     throw new DustbinContentException("The garbage is doesn't clean!");
@@ -53,16 +59,28 @@ namespace WasteRecycling
             {
                 if (((PaperGarbage)garbage).Squeezed)
                 {
-                    PaperContent = new PaperGarbage[PaperContent.Length + 1];
-                    PaperContent[PaperContent.Length -1] = ((PaperGarbage)garbage);
+                    PaperGarbage[] myarray = new PaperGarbage[PaperContent.Length];
+                    Array.Copy(PaperContent, myarray, PaperContent.Length);
+                    PaperContent = new PaperGarbage[myarray.Length + 1];
+
+                    for (int i = 0; i < myarray.Length; i++)
+                        PaperContent[i] = myarray[i];
+
+                    PaperContent[PaperContent.Length - 1] = (PaperGarbage)garbage;
                 }
                 else
                     throw new DustbinContentException("The garbage is doesn't squeezed!");
             }
             else if (garbage is Garbage)
             {
-                HouseWasteContent = new Garbage[HouseWasteContent.Length + 1];
-                HouseWasteContent[HouseWasteContent.Length -1] = garbage;
+                Garbage[] myarray = new Garbage[HouseWasteContent.Length];
+                Array.Copy(HouseWasteContent, myarray, HouseWasteContent.Length);
+                HouseWasteContent = new Garbage[myarray.Length + 1];
+
+                for (int i = 0; i < myarray.Length; i++)
+                    HouseWasteContent[i] = myarray[i];
+
+                HouseWasteContent[HouseWasteContent.Length - 1] = (Garbage)garbage;
             }
             else
                 throw new DustbinContentException("Unknown type of garbage!");

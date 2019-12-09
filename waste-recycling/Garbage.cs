@@ -2,7 +2,7 @@ namespace WasteRecycling
 {
     public class Garbage
     {
-        public string Name { get; set; }
+        public string Name;
 
         public Garbage(string name)
         {
